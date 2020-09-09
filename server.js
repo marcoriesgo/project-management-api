@@ -5,11 +5,8 @@ const passport = require("passport");
 const path = require('path')
 
 const users = require("./routes/api/users");
-const plaid = require("./routes/api/plaid");
-const expenses = require("./routes/api/expenses");
-const budgets = require("./routes/api/budgets");
-const bills = require("./routes/api/bills");
-const investments = require("./routes/api/investments");
+const todos = require("./routes/api/todos");
+const projects = require("./routes/api/projects");
 
 const app = express();
 
@@ -26,7 +23,7 @@ mongoose.connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true 
 const connected = mongoose.connection;
 
 // Error / success
-connected.on('error', (err) => console.log(err.message + ' is Mongod not running?'));
+connected.on('error', (err) => console.log(err.message + ' is Mongodb not running?'));
 connected.on('connected', () => console.log('mongo connected: ', MONGODB_URI));
 connected.on('disconnected', () => console.log('mongo disconnected'));
 
@@ -46,12 +43,8 @@ require("./config/passport")(passport);
 
 // Routes
 app.use("/api/users", users);
-app.use("/api/plaid", plaid);
-app.use("/api/expenses", expenses);
-app.use("/api/budgets", budgets);
-app.use("/api/bills", bills);
-app.use("/api/investments", investments);
-
+app.use("/api/todos", todos);
+app.use("/api/projects", projects);
 
 //Server static assts if in production:
 if (process.env.NODE_ENV === 'production') { 

@@ -1,11 +1,11 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-// Create Bills Schema
-const BillSchema = new Schema({
-  userId: {
+// Create Todo Schema
+const TodoSchema = new Schema({
+  projectId: {
     type: Schema.Types.ObjectId, 
-    ref: "users"
+    ref: "project"
   },
   name: {
     type: String,
@@ -15,14 +15,14 @@ const BillSchema = new Schema({
     type: String,
     required: true
   },
-  categoryId: {
+  description: {
     type: Number,
     required: true
   },
-  amount: {
-    type: Number,
-    required: true
+  date: {
+    type: Date,
+    required: Date.now
   }
 });
 
-module.exports = Bill = mongoose.model("bills", BillSchema);
+module.exports = Todo = mongoose.model("todos", TodoSchema);

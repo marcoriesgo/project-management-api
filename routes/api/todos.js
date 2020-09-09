@@ -2,39 +2,39 @@ const express = require("express");
 const router = express.Router();
 
 
-// Get Expense model
-const Expense = require("../../models/Expense");
+// Get Todo model
+const Todo = require("../../models/Todo");
 
 router.post('/create', async (req, res) => {
-    Expense.create(req.body, (error, createdExpense) => {
+    Todo.create(req.body, (error, createdTodo) => {
       if (error) {
         res.status(400).json({ error: error.message })
       }
-      res.status(200).send(createdExpense) 
+      res.status(200).send(createdTodo) 
     })
 })
 
 router.get('/:id', (req, res) => {
-    Expense.find({ userId: req.params.id })
-        .then(expenses => res.json(expenses))
+    Todo.find({ userId: req.params.id })
+        .then(todos => res.json(todos))
         .catch(err => console.log(err));
 })
 
 router.delete('/:id', (req, res) => {
-    Expense.findByIdAndRemove(req.params.id, (err, deletedExpense) => {
+    Todo.findByIdAndRemove(req.params.id, (err, deletedTodo) => {
       if (err) {
         res.status(400).json({ error: err.message })
       }
-      res.status(200).json(deletedExpense)
+      res.status(200).json(deletedTodo)
     })
 })
 
 router.put('/:id', (req, res) => {
-    Expense.findByIdAndUpdate(req.params.id, req.body, { new: true }, (err, updatedExpense) => {
+    Todo.findByIdAndUpdate(req.params.id, req.body, { new: true }, (err, updatedTodo) => {
       if (err) {
         res.status(400).json({ error: err.message })
       }
-      res.status(200).json(updatedExpense)
+      res.status(200).json(updatedTodo)
     })
 })
 

@@ -1,24 +1,24 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-// Create Expense Schema 
-const InvestmentSchema = new Schema({
+// Create Bills Schema
+const ProjectSchema = new Schema({
   userId: {
     type: Schema.Types.ObjectId, 
     ref: "users"
   },
-  companyName: {
+  name: {
     type: String,
     required: true
   },
-  stockTag: {
+  description: {
     type: String,
     required: true
   },
-  numberOfShares: {
-    type: String,
-    required: true
+  date: {
+    type: Date,
+    default: Date.now
   }
 });
 
-module.exports = Investment = mongoose.model("investments", InvestmentSchema);
+module.exports = Project = mongoose.model("projects", ProjectSchema);
